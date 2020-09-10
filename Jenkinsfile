@@ -38,7 +38,8 @@ pipeline {
             steps {
                 script{
                     image = docker.build("adminserver:${env.BUILD_ID}")
-                    image.run("-p 8010:8010 --name adminserver.${env.BUILD_ID} --restart=always")
+                    image.run("-p 8010:8010 --name adminserver.${env.BUILD_ID} --restart=always \
+                            --add-host eurekaserver1:172.17.0.1 --add-host eurekaserver2:172.17.0.1")
                 }
             }
         }
